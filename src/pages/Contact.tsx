@@ -8,8 +8,7 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import { useSEO } from '@/hooks/useSEO';
 
-import { useQuery } from '@tanstack/react-query';
-import { getDealershipSettings } from '@/services/api.service';
+import { useSettings } from '@/hooks/useSettings';
 
 const Contact = () => {
   useSEO({
@@ -19,10 +18,7 @@ const Contact = () => {
     canonical: 'https://elite-cars-project.netlify.app/contact'
   });
   const { toast } = useToast();
-  const { data: settings, isLoading: settingsLoading } = useQuery({
-    queryKey: ['dealershipSettings'],
-    queryFn: getDealershipSettings
-  });
+  const { settings: contactInfo, isLoading: settingsLoading } = useSettings();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -48,16 +44,6 @@ const Contact = () => {
     );
   }
 
-  // Fallback defaults if no settings found
-  const contactInfo = settings || {
-    address: '123 Luxury Lane, Beverly Hills, CA 90210',
-    phone: '+1 (555) 123-4567',
-    email: 'info@elitecars.com',
-    business_hours: {
-      mon_sat: '9:00 AM - 7:00 PM',
-      sunday: '10:00 AM - 5:00 PM'
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background py-16">

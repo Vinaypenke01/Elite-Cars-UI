@@ -1,8 +1,11 @@
 import { Mail, Phone, MapPin, Shield, UserPlus } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import logo from '@/assets/logo.png';
+import { useSettings } from '@/hooks/useSettings';
 
 const Footer = () => {
+  const { settings: contactInfo } = useSettings();
+
   return (
     <footer className="border-t border-border bg-card">
       <div className="container mx-auto px-4 py-12">
@@ -74,19 +77,20 @@ const Footer = () => {
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-accent" />
-                <span>+1 (555) 123-4567</span>
+                <span>{contactInfo.phone}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-accent" />
-                <span>info@elitecarss.com</span>
+                <span>{contactInfo.email}</span>
               </li>
               <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-accent" />
-                <span>123 Luxury Lane, CA 90210</span>
+                <span>{contactInfo.address}</span>
               </li>
             </ul>
           </div>
         </div>
+
 
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Elite Carss. All rights reserved.</p>

@@ -60,6 +60,8 @@ const RecentlySold = () => {
                     <img
                       src={car.image || 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400'}
                       alt={car.car_name}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-48 object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
                     <Badge className="absolute top-3 right-3 bg-destructive">
