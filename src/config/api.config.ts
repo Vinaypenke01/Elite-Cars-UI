@@ -4,7 +4,7 @@
  */
 
 // Set this to true for local development, false for production
-const USE_LOCAL_API = true;
+const USE_LOCAL_API = false;
 
 const LOCAL_URL = 'http://localhost:8000/api/v1';
 const PRODUCTION_URL = 'https://elite-cars-backend-production.up.railway.app/api/v1';
