@@ -24,7 +24,6 @@ const Landing = () => {
   // Fetch featured cars from Firestore
   const { data: featuredCarsData = [], isLoading: loadingCars } = useFeaturedCars();
   const featuredCars = featuredCarsData.slice(0, 3);
-  console.log(`Landing Page: featuredCarsData length: ${featuredCarsData.length}`, featuredCars);
 
   const features = [
     {
@@ -264,8 +263,6 @@ const Landing = () => {
                         src={(car as any).primary_image || (car as any).images?.[0]?.image_url || (car as any).images?.[0]?.image || (car as any).images?.[0] || '/placeholder.svg'}
                         alt={(car as any).manufacturer_name + ' ' + (car as any).model_name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        onLoad={(e) => console.log(`Landing Page: Loaded image for ${(car as any).model_name}: ${(e.target as HTMLImageElement).src}`)}
-                        onError={(e) => console.error(`Landing Page: Failed to load image for ${(car as any).model_name}: ${(e.target as HTMLImageElement).src}`)}
                       />
                       <Badge className="absolute top-4 left-4 bg-accent">
                         Featured

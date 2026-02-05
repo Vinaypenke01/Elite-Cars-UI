@@ -179,8 +179,6 @@ const CarDetails = () => {
                     src={allImages[currentImageIndex]}
                     alt={`${fullName} - Image ${currentImageIndex + 1}`}
                     className="w-full h-full object-cover"
-                    onLoad={() => console.log(`CarDetails: Loaded main image ${currentImageIndex + 1}/${allImages.length} for ${fullName}: ${allImages[currentImageIndex]}`)}
-                    onError={() => console.error(`CarDetails: Failed to load main image ${currentImageIndex + 1}/${allImages.length} for ${fullName}: ${allImages[currentImageIndex]}`)}
                   />
 
                   {/* Navigation Arrows - Always visible on mobile, hover on desktop */}
@@ -226,8 +224,6 @@ const CarDetails = () => {
                             src={img}
                             alt={`Thumbnail ${i + 1}`}
                             className="w-full h-full object-cover"
-                            onLoad={() => console.log(`CarDetails: Loaded thumbnail ${i + 1} for ${fullName}: ${img}`)}
-                            onError={() => console.error(`CarDetails: Failed to load thumbnail ${i + 1} for ${fullName}: ${img}`)}
                           />
                         </button>
                       ))}
@@ -518,8 +514,6 @@ const CarDetails = () => {
                             src={relatedCar.primary_image || relatedCar.images?.[0]?.image_url || '/placeholder.svg'}
                             alt={`${relatedCar.manufacturer_name} ${relatedCar.model_name}`}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            onLoad={(e) => console.log(`RelatedCar: Loaded image for ${relatedCar.model_name}: ${(e.target as HTMLImageElement).src}`)}
-                            onError={(e) => console.error(`RelatedCar: Failed to load image for ${relatedCar.model_name}: ${(e.target as HTMLImageElement).src}`)}
                           />
                           <Badge variant="secondary" className="absolute top-3 left-3 text-xs">
                             {relatedCar.body_type}

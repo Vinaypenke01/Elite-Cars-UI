@@ -25,7 +25,6 @@ interface CarCardProps {
 
 const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image, images, car_images, image, body_type, type, fuel_type, transmission, model_year, featured }: CarCardProps) => {
   const navigate = useNavigate();
-  console.log(`CarCard rendering for ID: ${id}`, { manufacturer_name, model_name, primary_image });
 
   const getImageUrl = (img: any) => {
     if (typeof img === 'string') return img;
@@ -60,9 +59,7 @@ const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image
               src={displayImage}
               alt={carName}
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-              onLoad={() => console.log(`Successfully loaded image for ${carName}: ${displayImage}`)}
               onError={(e) => {
-                console.error(`Failed to load image for ${carName}: ${displayImage}`);
                 (e.target as HTMLImageElement).src = '/placeholder.svg';
               }}
             />
