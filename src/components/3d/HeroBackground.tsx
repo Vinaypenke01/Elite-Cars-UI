@@ -7,9 +7,15 @@ import * as random from 'maath/random/dist/maath-random.esm';
 function Stars(props: any) {
     const ref = useRef<any>();
 
-    // Create random points in a sphere
-    // @ts-ignore - maath types can be tricky
-    const sphere = random.inSphere(new Float32Array(5000), { radius: 1.5 });
+    // Create random points in a sphere - size must be multiple of 3 (x,y,z)
+    const sphere = useMemo(() => {
+        const data = random.inSphere(new Float32Array(5001), { radius: 1.5 }) as Float32Array;
+        // Ensure no NaN values reach the geometry
+        for (let i = 0; i < data.length; i++) {
+            if (isNaN(data[i])) data[i] = 0;
+        }
+        return data;
+    }, []);
 
     useFrame((state, delta) => {
         if (ref.current) {
