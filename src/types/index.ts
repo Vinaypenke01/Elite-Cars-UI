@@ -52,6 +52,7 @@ export interface Car {
     service_history: boolean;
     description: string;
     is_active: boolean;
+    is_available: boolean;
     created_at: string;
     images: CarImage[];
     features: CarFeature[];

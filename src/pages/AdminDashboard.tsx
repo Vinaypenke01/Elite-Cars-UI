@@ -64,7 +64,7 @@ import { useEnquiries, useUpdateEnquiryStatus } from '@/hooks/useAdminEnquiries'
 import { useToast } from '@/hooks/use-toast';
 import { useState, useEffect } from 'react';
 import CarFormDialog from '@/components/admin/CarFormDialog';
-import { Car as CarType } from '@/data/carsData';
+import { Car as CarType } from '@/types';
 import { Loader2 } from 'lucide-react';
 
 // Recently Sold Table Component
@@ -137,10 +137,10 @@ const AdminDashboard = () => {
     const [carToDelete, setCarToDelete] = useState<string | null>(null);
 
     const { data: carsData, isLoading: carsLoading } = useCars();
-    const allCars = (carsData || []) as CarType[];
+    const allCars = (carsData || []) as any[];
 
     // Filter to show only available cars in current stock
-    const cars = allCars.filter(car => car.is_available !== false);
+    const cars = allCars.filter(car => car.is_available !== false || car.is_active !== false);
 
     // Enquiries data
     const { data: enquiries = [], isLoading: enquiriesLoading } = useEnquiries();
@@ -521,20 +521,28 @@ const AdminDashboard = () => {
                                                 </TableRow>
                                             </TableHeader>
                                             <TableBody>
-                                                {cars.map((car) => (
+                                                {cars.map((car: CarType) => (
                                                     <TableRow key={car.id}>
                                                         <TableCell className="flex items-center gap-3">
-                                                            <img src={car.images?.[0] || (car as any).image || '/placeholder.svg'} alt={car.name} className="h-10 w-16 object-cover rounded" />
-                                                            <span className="font-medium">{car.name}</span>
+                                                            <img
+                                                                src={car.images?.[0]?.image_url || (car as any).primary_image || '/placeholder.svg'}
+                                                                alt={car.model_name}
+                                                                className="h-10 w-16 object-cover rounded"
+                                                            />
+                                                            <span className="font-medium">
+                                                                {car.manufacturer_details?.name} {car.model_name}
+                                                            </span>
                                                         </TableCell>
                                                         <TableCell>
-                                                            <Badge variant="outline">{car.type}</Badge>
+                                                            <Badge variant="outline">{car.body_type || (car as any).type}</Badge>
                                                         </TableCell>
-                                                        <TableCell className="font-semibold text-accent">{car.price}</TableCell>
+                                                        <TableCell className="font-semibold text-accent">₹{car.price.toLocaleString()}</TableCell>
                                                         <TableCell>
-                                                            {car.featured ? (
-                                                                <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20">Yes</Badge>
-                                                            ) : 'No'}
+                                                            {car.is_active ? (
+                                                                <Badge className="bg-amber-500/10 text-amber-500 border-amber-500/20">Active</Badge>
+                                                            ) : (
+                                                                <Badge variant="secondary">Inactive</Badge>
+                                                            )}
                                                         </TableCell>
                                                         <TableCell className="text-right space-x-2">
                                                             <Button
