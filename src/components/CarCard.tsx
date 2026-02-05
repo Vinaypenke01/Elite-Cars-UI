@@ -59,6 +59,11 @@ const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image
               src={displayImage}
               alt={carName}
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+              onLoad={() => console.log(`Successfully loaded image for ${carName}: ${displayImage}`)}
+              onError={(e) => {
+                console.error(`Failed to load image for ${carName}: ${displayImage}`);
+                (e.target as HTMLImageElement).src = '/placeholder.svg';
+              }}
             />
             {featured && (
               <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
