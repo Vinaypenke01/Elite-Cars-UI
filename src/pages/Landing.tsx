@@ -24,6 +24,7 @@ const Landing = () => {
   // Fetch featured cars from Firestore
   const { data: featuredCarsData = [], isLoading: loadingCars } = useFeaturedCars();
   const featuredCars = featuredCarsData.slice(0, 3);
+  console.log(`Landing Page: featuredCarsData length: ${featuredCarsData.length}`, featuredCars);
 
   const features = [
     {

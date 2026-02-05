@@ -25,6 +25,7 @@ interface CarCardProps {
 
 const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image, images, car_images, image, body_type, type, fuel_type, transmission, model_year, featured }: CarCardProps) => {
   const navigate = useNavigate();
+  console.log(`CarCard rendering for ID: ${id}`, { manufacturer_name, model_name, primary_image });
 
   const getImageUrl = (img: any) => {
     if (typeof img === 'string') return img;
