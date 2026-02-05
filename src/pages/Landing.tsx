@@ -260,7 +260,7 @@ const Landing = () => {
                   <Card className="overflow-hidden group cursor-pointer h-full" onClick={() => navigate(`/car/${car.id}`)}>
                     <div className="relative overflow-hidden h-48 sm:h-64">
                       <img
-                        src={(car as any).primary_image || (car as any).images?.[0] || '/placeholder.svg'}
+                        src={(car as any).primary_image || (car as any).images?.[0]?.image_url || (car as any).images?.[0]?.image || (car as any).images?.[0] || '/placeholder.svg'}
                         alt={(car as any).manufacturer_name + ' ' + (car as any).model_name}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />

@@ -83,7 +83,7 @@ const CarDetails = () => {
   // Handle images from the new API structure
   const imagesRaw = (car as any).images || [];
   const allImages = imagesRaw.length > 0
-    ? imagesRaw.map((img: any) => img.image_url || img.image)
+    ? imagesRaw.map((img: any) => img.image_url || img.image || img)
     : ['/placeholder.svg'];
 
   const nextImage = () => {
@@ -135,21 +135,21 @@ const CarDetails = () => {
 
       <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/10">
         <style>{`
-  .custom - scrollbar:: -webkit - scrollbar {
-  width: 6px;
-}
-          .custom - scrollbar:: -webkit - scrollbar - track {
-  background: hsl(var(--muted));
-  border - radius: 3px;
-}
-          .custom - scrollbar:: -webkit - scrollbar - thumb {
-  background: hsl(var(--accent));
-  border - radius: 3px;
-}
-          .custom - scrollbar:: -webkit - scrollbar - thumb:hover {
-  background: hsl(var(--accent) / 0.8);
-}
-`}</style>
+          .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-track {
+            background: hsl(var(--muted));
+            border-radius: 3px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: hsl(var(--accent));
+            border-radius: 3px;
+          }
+          .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: hsl(var(--accent) / 0.8);
+          }
+        `}</style>
         <div className="container mx-auto px-4 py-6 md:py-12 max-w-7xl">
           {/* Back Button - Sticky on mobile */}
           <div className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm -mx-4 px-4 py-3 mb-6 md:static md:bg-transparent md:backdrop-blur-none md:mb-8">
@@ -215,12 +215,12 @@ const CarDetails = () => {
                         <button
                           key={i}
                           onClick={() => setCurrentImageIndex(i)}
-                          className={`flex - shrink - 0 w - 16 h - 16 md: w - 20 md: h - 20 rounded - lg overflow - hidden border - 2 transition - all ${i === currentImageIndex
+                          className={`flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden border-2 transition-all ${i === currentImageIndex
                             ? 'border-accent scale-105 shadow-md'
                             : 'border-border hover:border-accent/50'
-                            } `}
+                            }`}
                         >
-                          <img src={img} alt={`Thumbnail ${i + 1} `} className="w-full h-full object-cover" />
+                          <img src={img} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" />
                         </button>
                       ))}
                     </div>
@@ -502,7 +502,7 @@ const CarDetails = () => {
                     <Card
                       key={relatedCar.id}
                       className="flex-shrink-0 w-full md:w-[calc(33.333%-11px)] border-border hover:border-accent hover:shadow-lg transition-all cursor-pointer group"
-                      onClick={() => navigate(`/ car / ${relatedCar.id} `)}
+                      onClick={() => navigate(`/car/${relatedCar.id}`)}
                     >
                       <CardContent className="p-0">
                         <div className="relative h-48 md:h-56 overflow-hidden rounded-t-lg bg-muted">
@@ -547,9 +547,9 @@ const CarDetails = () => {
                     <button
                       key={idx}
                       onClick={() => setRelatedCarIndex(idx)}
-                      className={`h - 2 rounded - full transition - all ${idx === relatedCarIndex ? 'w-6 bg-accent' : 'w-2 bg-muted-foreground/30'
-                        } `}
-                      aria-label={`Go to car ${idx + 1} `}
+                      className={`h-2 rounded-full transition-all ${idx === relatedCarIndex ? 'w-6 bg-accent' : 'w-2 bg-muted-foreground/30'
+                        }`}
+                      aria-label={`Go to car ${idx + 1}`}
                     />
                   ))}
                 </div>
@@ -636,7 +636,7 @@ const InfoItem = ({
     <Icon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
     <div className="flex-1 min-w-0">
       <p className="text-xs text-muted-foreground mb-1">{label}</p>
-      <p className={`text - sm md: text - base font - semibold ${valueColor} `}>{value}</p>
+      <p className={`text-sm md:text-base font-semibold ${valueColor}`}>{value}</p>
     </div>
   </div>
 );

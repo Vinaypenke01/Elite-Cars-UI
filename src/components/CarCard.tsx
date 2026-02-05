@@ -26,7 +26,17 @@ interface CarCardProps {
 const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image, images, car_images, image, body_type, type, fuel_type, transmission, model_year, featured }: CarCardProps) => {
   const navigate = useNavigate();
 
-  const displayImage = primary_image || car_images?.[0]?.image || images?.[0] || (image as string) || '/placeholder.svg';
+  const getImageUrl = (img: any) => {
+    if (typeof img === 'string') return img;
+    return img?.image_url || img?.image || '/placeholder.svg';
+  };
+
+  const displayImage = getImageUrl(primary_image) ||
+    getImageUrl(car_images?.[0]) ||
+    getImageUrl(images?.[0]) ||
+    getImageUrl(image) ||
+    '/placeholder.svg';
+
   const carName = name || `${manufacturer_name || ''} ${model_name || ''}`.trim() || 'Unknown Car';
   const carType = body_type || type || 'Vehicle';
 
