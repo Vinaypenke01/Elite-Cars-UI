@@ -3,8 +3,14 @@
  * Base configuration for Django REST API
  */
 
-// API Base URL - Update this based on your environment
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+// Set this to true for local development, false for production
+const USE_LOCAL_API = true;
+
+const LOCAL_URL = 'http://localhost:8000/api/v1';
+const PRODUCTION_URL = 'https://elite-cars-backend-production.up.railway.app/api/v1';
+
+// API Base URL - Update this based on the toggle above
+export const API_BASE_URL = USE_LOCAL_API ? LOCAL_URL : PRODUCTION_URL;
 
 // API Endpoints
 export const API_ENDPOINTS = {
