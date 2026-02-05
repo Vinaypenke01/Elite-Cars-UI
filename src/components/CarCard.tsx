@@ -58,6 +58,8 @@ const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image
             <img
               src={displayImage}
               alt={carName}
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
               onError={(e) => {
                 (e.target as HTMLImageElement).src = '/placeholder.svg';

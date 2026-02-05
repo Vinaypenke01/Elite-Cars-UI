@@ -13,6 +13,7 @@ import Joyride from 'react-joyride';
 import { useTour } from '@/context/TourContext';
 import { carDetailsSteps } from '@/guides/tourSteps';
 import { useCar } from '@/hooks/useCars';
+import { useSEO } from '@/hooks/useSEO';
 import { useState } from 'react';
 import { EnquiryForm } from '@/components/EnquiryForm';
 
@@ -27,6 +28,14 @@ const CarDetails = () => {
   const [enquiryFormOpen, setEnquiryFormOpen] = useState(false);
 
   const { data: car, isLoading, error } = useCar(id || '');
+
+  useSEO({
+    title: car ? `${(car as any).manufacturer_details?.name} ${(car as any).model_name}` : 'Car Details',
+    description: car ? (car as any).description?.substring(0, 160) : 'View car details at Elite Motors.',
+    keywords: car ? `${(car as any).model_name}, luxury ${(car as any).body_type}, buy ${(car as any).manufacturer_details?.name}` : 'car details, premium vehicles',
+    ogImage: car && (car as any).images?.[0]?.image_url,
+    canonical: `https://elite-cars-project.netlify.app/car/${id}`
+  });
 
   if (isLoading) {
     return (

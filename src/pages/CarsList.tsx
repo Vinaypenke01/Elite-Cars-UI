@@ -9,9 +9,16 @@ import Joyride from 'react-joyride';
 import { useTour } from '@/context/TourContext';
 import { carsListSteps } from '@/guides/tourSteps';
 import { useCars } from '@/hooks/useCars';
+import { useSEO } from '@/hooks/useSEO';
 import { Filter, AlertCircle } from 'lucide-react';
 
 const CarsList = () => {
+  useSEO({
+    title: 'Browse Vehicles',
+    description: 'Explore our premium collection of luxury and electric vehicles. Filter by type and find your perfect car at Elite Motors.',
+    keywords: 'luxury cars for sale, buy electric vehicles, premium cars collection, car inventory',
+    canonical: 'https://elite-cars-project.netlify.app/cars'
+  });
   const { run, stepIndex, setStepIndex, stopTour } = useTour();
   const [selectedType, setSelectedType] = useState<string>('All');
 
@@ -21,11 +28,11 @@ const CarsList = () => {
   const types = ['All', 'Electric', 'Electric Luxury', 'Electric SUV', 'Electric Sports'];
 
   // Filter out unavailable (sold) cars and filter by type
-  const availableCars = carsData.filter((car) => car.is_available !== false);
+  const availableCars = (carsData as any[]).filter((car) => car.is_available !== false);
   const filteredCars =
     selectedType === 'All'
       ? availableCars
-      : availableCars.filter((car) => car.type === selectedType);
+      : availableCars.filter((car) => car.body_type === selectedType || car.type === selectedType);
 
   return (
     <>

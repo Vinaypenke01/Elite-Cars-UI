@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Award, Users, Car, Shield } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
+import { useSEO } from '@/hooks/useSEO';
 
 const features = [
   {
@@ -26,6 +27,12 @@ const features = [
 ];
 
 const About = () => {
+  useSEO({
+    title: 'About Us',
+    description: 'Learn about Elite Motors, your premier destination for luxury and performance vehicles since 2024. Our story, mission, and commitment to excellence.',
+    keywords: 'about elite motors, luxury car dealership story, premium car showroom beverly hills',
+    canonical: 'https://elite-cars-project.netlify.app/about'
+  });
   return (
     <div className="min-h-screen bg-background py-16">
       <div className="container mx-auto px-4">
@@ -36,7 +43,7 @@ const About = () => {
         >
           <h1 className="text-4xl font-bold mb-4">About Elite Carss</h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            We are passionate about connecting car enthusiasts with their dream vehicles. 
+            We are passionate about connecting car enthusiasts with their dream vehicles.
             Since 2024, we've been the premier destination for luxury and performance automobiles.
           </p>
         </motion.div>
@@ -51,13 +58,13 @@ const About = () => {
             <div>
               <h2 className="text-2xl font-bold mb-4">Our Story</h2>
               <p className="text-muted-foreground mb-4">
-                Elite Carss was founded with a simple mission: to provide an exceptional 
+                Elite Carss was founded with a simple mission: to provide an exceptional
                 car buying experience that matches the quality of the vehicles we sell.
               </p>
               <p className="text-muted-foreground">
-                Our team of automotive experts carefully curates each vehicle in our 
-                inventory, ensuring that every car meets our rigorous standards for 
-                performance, condition, and value. Whether you're looking for your 
+                Our team of automotive experts carefully curates each vehicle in our
+                inventory, ensuring that every car meets our rigorous standards for
+                performance, condition, and value. Whether you're looking for your
                 first luxury vehicle or adding to your collection, we're here to help.
               </p>
             </div>

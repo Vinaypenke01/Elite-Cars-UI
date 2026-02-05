@@ -14,12 +14,20 @@ import Joyride from 'react-joyride';
 import { useTour } from '@/context/TourContext';
 import { landingSteps } from '@/guides/tourSteps';
 import { useFeaturedCars } from '@/hooks/useCars';
+import { useSEO } from '@/hooks/useSEO';
 import logo from '@/assets/logo.png';
 import { motion } from 'framer-motion';
 
 const Landing = () => {
   const navigate = useNavigate();
   const { run, stepIndex, setStepIndex, stopTour } = useTour();
+
+  useSEO({
+    title: 'Home',
+    description: 'Explore our curated collection of luxury, performance, and premium pre-owned cars. Experience automotive excellence at Elite Motors.',
+    keywords: 'luxury cars home, premium car dealership, elite cars buy, luxury suv, sports cars',
+    canonical: 'https://elite-cars-project.netlify.app/'
+  });
 
   // Fetch featured cars from Firestore
   const { data: featuredCarsData = [], isLoading: loadingCars } = useFeaturedCars();
@@ -262,6 +270,8 @@ const Landing = () => {
                       <img
                         src={(car as any).primary_image || (car as any).images?.[0]?.image_url || (car as any).images?.[0]?.image || (car as any).images?.[0] || '/placeholder.svg'}
                         alt={(car as any).manufacturer_name + ' ' + (car as any).model_name}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       />
                       <Badge className="absolute top-4 left-4 bg-accent">
@@ -371,6 +381,8 @@ const Landing = () => {
                 <img
                   src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&h=600&fit=crop"
                   alt="Car service"
+                  loading="lazy"
+                  decoding="async"
                   className="rounded-2xl shadow-2xl"
                 />
                 <div className="absolute -bottom-6 -left-6 bg-accent text-accent-foreground p-6 rounded-xl shadow-lg">
@@ -415,6 +427,8 @@ const Landing = () => {
                         <img
                           src={testimonial.image}
                           alt={testimonial.name}
+                          loading="lazy"
+                          decoding="async"
                           className="w-12 h-12 rounded-full object-cover"
                         />
                         <div>

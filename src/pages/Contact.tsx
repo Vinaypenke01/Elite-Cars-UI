@@ -6,11 +6,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { useSEO } from '@/hooks/useSEO';
 
 import { useQuery } from '@tanstack/react-query';
 import { getDealershipSettings } from '@/services/api.service';
 
 const Contact = () => {
+  useSEO({
+    title: 'Contact Us',
+    description: 'Get in touch with Elite Motors for enquiries about our luxury vehicle collection. Visit our showroom or schedule a test drive today.',
+    keywords: 'contact elite motors, car dealership phone number, luxury car showroom address, schedule test drive',
+    canonical: 'https://elite-cars-project.netlify.app/contact'
+  });
   const { toast } = useToast();
   const { data: settings, isLoading: settingsLoading } = useQuery({
     queryKey: ['dealershipSettings'],

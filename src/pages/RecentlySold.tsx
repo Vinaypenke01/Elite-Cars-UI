@@ -1,11 +1,13 @@
-import { motion } from 'framer-motion';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
-import { useQuery } from '@tanstack/react-query';
-import { getRecentlySold } from '@/services/api.service';
 import { Loader2 } from 'lucide-react';
+import { useSEO } from '@/hooks/useSEO';
 
 const RecentlySold = () => {
+  useSEO({
+    title: 'Recently Sold',
+    description: 'Browse our recently sold luxury and premium vehicles. See the quality cars that have found their new owners at Elite Motors.',
+    keywords: 'sold cars, luxury car sales, premium vehicles sold, archive',
+    canonical: 'https://elite-cars-project.netlify.app/recently-sold'
+  });
   const { data: soldCars = [], isLoading } = useQuery({
     queryKey: ['recentlySold'],
     queryFn: () => getRecentlySold(20) // Fetch up to 20 recently sold cars
