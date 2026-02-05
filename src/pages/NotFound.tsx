@@ -1,7 +1,12 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useSEO } from "@/hooks/useSEO";
 
 const NotFound = () => {
+  useSEO({
+    title: '404 - Page Not Found',
+    description: 'The page you are looking for does not exist at Elite Motors.',
+  });
   const location = useLocation();
 
   useEffect(() => {
