@@ -165,34 +165,65 @@ const CarFormDialog = ({
     };
 
     useEffect(() => {
-        if (initialData && open) {
-            form.reset({
-                manufacturer_id: initialData.manufacturer_details?.id || 0,
-                model_name: initialData.model_name || '',
-                variant: initialData.variant || '',
-                body_type: initialData.body_type || '',
-                model_year: initialData.model_year || new Date().getFullYear(),
-                registration_year: initialData.registration_year || new Date().getFullYear(),
-                ownership: initialData.ownership || '1st Owner',
-                kilometers_driven: initialData.kilometers_driven || 0,
-                fuel_type: initialData.fuel_type || '',
-                transmission: initialData.transmission || '',
-                engine_cc: initialData.engine_cc || 0,
-                mileage: initialData.mileage || 0,
-                color: initialData.color || '',
-                price: Number(initialData.price) || 0,
-                is_negotiable: initialData.is_negotiable ?? true,
-                insurance_valid_till: initialData.insurance_valid_till || '',
-                rc_available: initialData.rc_available ?? true,
-                puc_available: initialData.puc_available ?? true,
-                loan_clearance: initialData.loan_clearance ?? true,
-                condition: initialData.condition || 'Good',
-                accident_history: initialData.accident_history ?? false,
-                service_history: initialData.service_history ?? true,
-                description: initialData.description || '',
-                feature_names: initialData.features?.map(f => f.name).join(', ') || '',
-                uploaded_images: null,
-            });
+        if (open) {
+            if (initialData) {
+                form.reset({
+                    manufacturer_id: initialData.manufacturer_details?.id || 0,
+                    model_name: initialData.model_name || '',
+                    variant: initialData.variant || '',
+                    body_type: initialData.body_type || '',
+                    model_year: initialData.model_year || new Date().getFullYear(),
+                    registration_year: initialData.registration_year || new Date().getFullYear(),
+                    ownership: initialData.ownership || '1st Owner',
+                    kilometers_driven: initialData.kilometers_driven || 0,
+                    fuel_type: initialData.fuel_type || '',
+                    transmission: initialData.transmission || '',
+                    engine_cc: initialData.engine_cc || 0,
+                    mileage: initialData.mileage || 0,
+                    color: initialData.color || '',
+                    price: Number(initialData.price) || 0,
+                    is_negotiable: initialData.is_negotiable ?? true,
+                    insurance_valid_till: initialData.insurance_valid_till || '',
+                    rc_available: initialData.rc_available ?? true,
+                    puc_available: initialData.puc_available ?? true,
+                    loan_clearance: initialData.loan_clearance ?? true,
+                    condition: initialData.condition || 'Good',
+                    accident_history: initialData.accident_history ?? false,
+                    service_history: initialData.service_history ?? true,
+                    description: initialData.description || '',
+                    feature_names: initialData.features?.map(f => f.name).join(', ') || '',
+                    uploaded_images: null,
+                });
+            } else {
+                // Reset to default values for new car
+                form.reset({
+                    manufacturer_id: 0,
+                    model_name: '',
+                    variant: '',
+                    body_type: '',
+                    model_year: new Date().getFullYear(),
+                    registration_year: new Date().getFullYear(),
+                    ownership: '1st Owner',
+                    kilometers_driven: 0,
+                    fuel_type: '',
+                    transmission: '',
+                    engine_cc: 0,
+                    mileage: 0,
+                    color: '',
+                    price: 0,
+                    is_negotiable: true,
+                    insurance_valid_till: '',
+                    rc_available: true,
+                    puc_available: true,
+                    loan_clearance: true,
+                    condition: 'Good',
+                    accident_history: false,
+                    service_history: true,
+                    description: '',
+                    feature_names: '',
+                    uploaded_images: null,
+                });
+            }
             setSelectedFiles([]);
         }
     }, [initialData, form, open]);

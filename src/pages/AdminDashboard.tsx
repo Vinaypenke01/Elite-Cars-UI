@@ -184,6 +184,15 @@ const AdminDashboard = () => {
                 title: editingCar ? 'Car Updated' : 'Car Added',
                 description: `Vehicle has been ${editingCar ? 'updated' : 'added'} successfully.`
             });
+        },
+        onError: (error: any) => {
+            console.error('Save car error:', error);
+            const errorMessage = error.response?.data?.message || error.message || 'Failed to save car details';
+            toast({
+                title: 'Operation Failed',
+                description: errorMessage,
+                variant: 'destructive'
+            });
         }
     });
 
