@@ -142,6 +142,8 @@ const Landing = () => {
               src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&h=1080&fit=crop"
               alt="Luxury car"
               className="w-full h-full object-cover"
+              onLoad={() => console.log('✅ Hero image loaded successfully')}
+              onError={() => console.error('❌ Hero image failed to load')}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/50" />
           </div>
@@ -273,6 +275,13 @@ const Landing = () => {
                         loading="lazy"
                         decoding="async"
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        onLoad={() => {
+                          console.log(`✅ Featured car image loaded: ${(car as any).manufacturer_name} ${(car as any).model_name}`);
+                        }}
+                        onError={(e) => {
+                          console.error(`❌ Featured car image failed: ${(car as any).manufacturer_name} ${(car as any).model_name}`);
+                          (e.target as HTMLImageElement).src = '/placeholder.svg';
+                        }}
                       />
                       <Badge className="absolute top-4 left-4 bg-accent">
                         Featured

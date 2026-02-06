@@ -188,6 +188,13 @@ const CarDetails = () => {
                     src={allImages[currentImageIndex]}
                     alt={`${fullName} - Image ${currentImageIndex + 1}`}
                     className="w-full h-full object-cover"
+                    onLoad={() => {
+                      console.log(`✅ Main image loaded for ${fullName} (${currentImageIndex + 1}): ${allImages[currentImageIndex]}`);
+                    }}
+                    onError={(e) => {
+                      console.error(`❌ Failed to load main image for ${fullName}: ${allImages[currentImageIndex]}`);
+                      (e.target as HTMLImageElement).src = '/placeholder.svg';
+                    }}
                   />
 
                   {/* Navigation Arrows - Always visible on mobile, hover on desktop */}
@@ -233,6 +240,13 @@ const CarDetails = () => {
                             src={img}
                             alt={`Thumbnail ${i + 1}`}
                             className="w-full h-full object-cover"
+                            onLoad={() => {
+                              console.log(`✅ Thumbnail ${i + 1} loaded for ${fullName}: ${img}`);
+                            }}
+                            onError={(e) => {
+                              console.error(`❌ Thumbnail ${i + 1} failed for ${fullName}: ${img}`);
+                              (e.target as HTMLImageElement).src = '/placeholder.svg';
+                            }}
                           />
                         </button>
                       ))}

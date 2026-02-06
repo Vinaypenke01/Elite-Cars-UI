@@ -61,7 +61,11 @@ const CarCard = ({ id, manufacturer_name, model_name, name, price, primary_image
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+              onLoad={() => {
+                console.log(`✅ Image loaded successfully for ${carName}: ${displayImage}`);
+              }}
               onError={(e) => {
+                console.error(`❌ Error loading image for ${carName}: ${displayImage}`);
                 (e.target as HTMLImageElement).src = '/placeholder.svg';
               }}
             />
