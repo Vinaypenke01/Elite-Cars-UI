@@ -54,6 +54,7 @@ import {
     deleteCar,
     addCar,
     updateCar,
+    getCarById,
     getDealershipSettings,
     updateDealershipSettings,
     DealershipSettings as DealershipSettingsType,
@@ -105,6 +106,8 @@ const RecentlySoldTable = () => {
                                 src={car.image || 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400'}
                                 alt={car.car_name}
                                 className="h-10 w-16 object-cover rounded grayscale"
+                                onLoad={() => console.log(`✅ Admin Recently Sold image loaded: ${car.car_name}`)}
+                                onError={() => console.error(`❌ Admin Recently Sold image failed: ${car.car_name}`)}
                             />
                             <span className="font-medium">{car.car_name}</span>
                         </TableCell>
@@ -135,6 +138,7 @@ const AdminDashboard = () => {
     const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
     const [editingCar, setEditingCar] = useState<CarType | null>(null);
     const [carToDelete, setCarToDelete] = useState<string | null>(null);
+    const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
     const { data: carsData, isLoading: carsLoading } = useCars();
     const allCars = (carsData || []) as any[];
@@ -263,9 +267,22 @@ const AdminDashboard = () => {
         });
     };
 
-    const handleEditCar = (car: CarType) => {
-        setEditingCar(car);
-        setIsDialogOpen(true);
+    const handleEditCar = async (car: CarType) => {
+        setIsLoadingDetails(true);
+        try {
+            const fullCarData = await getCarById(car.id.toString());
+            setEditingCar(fullCarData);
+            setIsDialogOpen(true);
+        } catch (error) {
+            console.error('Failed to fetch car details:', error);
+            toast({
+                title: 'Error',
+                description: 'Failed to fetch complete vehicle details. Please try again.',
+                variant: 'destructive'
+            });
+        } finally {
+            setIsLoadingDetails(false);
+        }
     };
 
     const handleAddNew = () => {
@@ -554,8 +571,12 @@ const AdminDashboard = () => {
                                                             >
                                                                 <Trophy className="h-4 w-4" />
                                                             </Button>
-                                                            <Button size="sm" variant="ghost" onClick={() => handleEditCar(car)}>
-                                                                <Edit className="h-4 w-4" />
+                                                            <Button size="sm" variant="ghost" onClick={() => handleEditCar(car)} disabled={isLoadingDetails}>
+                                                                {isLoadingDetails && editingCar?.id === car.id ? (
+                                                                    <Loader2 className="h-4 w-4 animate-spin text-accent" />
+                                                                ) : (
+                                                                    <Edit className="h-4 w-4" />
+                                                                )}
                                                             </Button>
                                                             <Button
                                                                 size="sm"
