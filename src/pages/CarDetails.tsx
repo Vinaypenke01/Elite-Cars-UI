@@ -365,9 +365,9 @@ const CarDetails = () => {
             className="mb-8 md:mb-12"
           >
             <h2 className="text-2xl md:text-3xl font-bold mb-4 md:mb-6">Vehicle Details</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-4 md:gap-6">
               {/* Basic Details - 2 columns on large screens */}
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
+              <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 <InfoCard icon={Calendar} label="Model Year" value={(car as any).model_year || 'N/A'} />
                 <InfoCard icon={FileText} label="Registration Year" value={(car as any).registration_year || 'N/A'} />
                 <InfoCard icon={User} label="Ownership" value={(car as any).ownership || 'N/A'} />
@@ -384,7 +384,7 @@ const CarDetails = () => {
                       <Check className="h-5 w-5 text-accent" />
                       <h3 className="text-lg font-semibold">Key Features</h3>
                     </div>
-                    <div className="space-y-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-[400px] overflow-y-auto pr-2 custom-scrollbar">
                       {carFeatures.map((feature: string, index: number) => (
                         <div
                           key={index}
